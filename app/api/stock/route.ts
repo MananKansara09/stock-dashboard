@@ -1,7 +1,7 @@
 import prisma from "@/db";
 import { GiveSearchParams } from "@/utils/queryparams/index";
 
-export async function GET(request: any) {
+export async function GET(request: Request) {
   const url = new URL(request.url);
   const queryParams = await GiveSearchParams(url);
 
