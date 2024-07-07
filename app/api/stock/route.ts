@@ -32,6 +32,11 @@ export async function GET(request: any) {
 
   return new Response(JSON.stringify(results), {
     status: 200,
-    headers: { "Content-Type": "application/json" },
+    headers: {
+      "Content-Type": "application/json",
+      "Cache-Control": "public, s-maxage=1",
+      "CDN-Cache-Control": "public, s-maxage=60",
+      "Vercel-CDN-Cache-Control": "public, s-maxage=3600",
+    },
   });
 }
