@@ -1,0 +1,47 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model angel_one {
+  id             String   @id @default(auto()) @map("_id") @db.ObjectId
+  token          String
+  symbol         String
+  name           String
+  expiry         String
+  strike         String
+  lotsize        String
+  instrumenttype String
+  exch_seg       String
+  tick_size      String
+
+  strategyId     String?  @db.ObjectId
+  strategy       StocksInStrategy? @relation(fields: [strategyId], references: [id])
+}
+
+model socket_Strike_data {
+  id    String   @id @default(auto()) @map("_id") @db.ObjectId
+  token String[]
+}
+
+model Wallet {
+  id     String @id @default(auto()) @map("_id") @db.ObjectId
+  Amount String
+}
+
+model StraegyName {
+  id     String            @id @default(auto()) @map("_id") @db.ObjectId
+  name   String
+  stocks StocksInStrategy[]
+}
+
+model StocksInStrategy {
+  id         String        @id @default(auto()) @map("_id") @db.ObjectId
+  strategyId String        @db.ObjectId
+  strategy   StraegyName   @relation(fields: [strategyId], references: [id])
+  angels     angel_one[]
+}
