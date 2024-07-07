@@ -14,11 +14,11 @@ export default function Home() {
   const [selected, setSelected] = useState(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-  const handleSearchChange = (e) => {
+  const handleSearchChange = (e:any) => {
     setSearch(e.target.value);
   };
 
-  const handleSelect = (stock) => {
+  const handleSelect = (stock:any) => {
     setSelected(stock);
     setSearch(stock.label);
     setIsDropdownOpen(false);
