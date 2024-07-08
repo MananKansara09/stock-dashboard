@@ -25,7 +25,7 @@ model angel_one {
 
 model socket_Strike_data {
   id    String   @id @default(auto()) @map("_id") @db.ObjectId
-  token String[]
+  token String[] @unique
 }
 
 model Wallet {
@@ -33,7 +33,7 @@ model Wallet {
   Amount String
 }
 
-model StraegyName {
+model StrategyName {
   id     String            @id @default(auto()) @map("_id") @db.ObjectId
   name   String
   stocks StocksInStrategy[]
@@ -42,6 +42,6 @@ model StraegyName {
 model StocksInStrategy {
   id         String        @id @default(auto()) @map("_id") @db.ObjectId
   strategyId String        @db.ObjectId
-  strategy   StraegyName   @relation(fields: [strategyId], references: [id])
+  strategy   StrategyName   @relation(fields: [strategyId], references: [id])
   angels     angel_one[]
 }
